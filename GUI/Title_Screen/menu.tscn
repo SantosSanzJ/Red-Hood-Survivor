@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=3 uid="uid://gfcjo1grbxno"]
+
+[ext_resource type="FontFile" uid="uid://cp1xtijr24741" path="res://Font/tenderness.otf" id="1_3tram"]
+[ext_resource type="Script" path="res://GUI/Title_Screen/menu.gd" id="1_d17cs"]
+[ext_resource type="PackedScene" uid="uid://ocj04sw6ygw5" path="res://GUI/button.tscn" id="3_1ulr5"]
+[ext_resource type="Texture2D" uid="uid://cpbofw568vdb8" path="res://Textures/Environment/Jungle/1.Backround.png" id="4_m744v"]
+[ext_resource type="Script" path="res://GUI/Title_Screen/ParallaxBackground.gd" id="4_u5gm6"]
+[ext_resource type="Texture2D" uid="uid://da3j534iiqjw5" path="res://Textures/Environment/Jungle/2.Trees_back.png" id="5_2lnfm"]
+[ext_resource type="Texture2D" uid="uid://bervs7b7f2cbi" path="res://Textures/Environment/Jungle/3.Trees_front.png" id="6_vv3m1"]
+[ext_resource type="Texture2D" uid="uid://bxamo6uilb61r" path="res://Textures/Environment/Jungle/4.Ground.png" id="7_8pjpd"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d17cs")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 100.0
+theme_override_fonts/font = ExtResource("1_3tram")
+theme_override_font_sizes/font_size = 72
+text = "Red Hood Survivor"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="btn_play" parent="." instance=ExtResource("3_1ulr5")]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 250.0
+offset_right = 360.0
+offset_bottom = 280.0
+text = "Play
+"
+
+[node name="btn_exit" parent="." instance=ExtResource("3_1ulr5")]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 290.0
+offset_right = 360.0
+offset_bottom = 320.0
+text = "Quit"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scale = Vector2(2, 2)
+transform = Transform2D(2, 0, 0, 2, 0, 0)
+script = ExtResource("4_u5gm6")
+
+[node name="PLBackGround" type="ParallaxLayer" parent="ParallaxBackground"]
+texture_filter = 1
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/PLBackGround"]
+texture = ExtResource("4_m744v")
+centered = false
+
+[node name="PLTreesFront" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(320, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/PLTreesFront"]
+texture = ExtResource("5_2lnfm")
+centered = false
+
+[node name="PLTreesBack" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(320, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/PLTreesBack"]
+texture = ExtResource("6_vv3m1")
+centered = false
+
+[node name="PLGround" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(320, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/PLGround"]
+texture = ExtResource("7_8pjpd")
+centered = false
+
+[connection signal="click_end" from="btn_play" to="." method="_on_btn_play_click_end"]
+[connection signal="click_end" from="btn_exit" to="." method="_on_btn_exit_click_end"]

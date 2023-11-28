@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkajxs4teu4e2"]
+
+[ext_resource type="Script" path="res://Attacks/tornado.gd" id="1_3fj40"]
+[ext_resource type="Texture2D" uid="uid://c1pvobts17ujc" path="res://Textures/Items/Weapons/tornado.png" id="1_gftup"]
+[ext_resource type="AudioStream" uid="uid://cwyusxy53ouw7" path="res://Audio/SoundEffect/tornado.ogg" id="3_oay7j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d57xu"]
+size = Vector2(17, 26)
+
+[node name="Tornado" type="Area2D" groups=["attack"]]
+top_level = true
+scale = Vector2(0.1, 0.1)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_3fj40")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_d57xu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_gftup")
+
+[node name="snd_attack" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_oay7j")
+volume_db = -21.389
+autoplay = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
